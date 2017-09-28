@@ -46,32 +46,74 @@ import com.example.bot.spring.DatabaseEngine;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+//@SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+@SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class })
+
 public class KitchenSinkTester {
 	@Autowired
-	private DatabaseEngine databaseEngine;
+	//private DatabaseEngine databaseEngine;
+	private SQLDatabaseEngine sqlDatabaseEngine;
+	
+//	@Test
+//	public void testNotFound() throws Exception {
+//		boolean thrown = false;
+//		try {
+//			this.databaseEngine.search("no");
+//		} catch (Exception e) {
+//			thrown = true;
+//		}
+//		assertThat(thrown);
+//	}
+	
+//	@Test
+//	public void testFound() throws Exception {
+//		boolean thrown = false;
+//		String result = null;
+//		try {
+//			result = this.databaseEngine.search("abc");
+//		} catch (Exception e) {
+//			thrown = true;
+//		}
+//		assertThat(!thrown);
+//		assertThat(result.equals("def"));
+//	}
 	
 	@Test
-	public void testNotFound() throws Exception {
-		boolean thrown = false;
-		try {
-			this.databaseEngine.search("no");
-		} catch (Exception e) {
-			thrown = true;
-		}
-		assertThat(thrown);
-	}
-	
-	@Test
-	public void testFound() throws Exception {
+	public void newTestFound() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
-			result = this.databaseEngine.search("abc");
+			result = this.sqlDatabaseEngine.search("Fine");
 		} catch (Exception e) {
 			thrown = true;
 		}
-		assertThat(!thrown);
-		assertThat(result.equals("def"));
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("That is very good!");
+	}
+	
+	@Test
+	public void new2TestFound() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqlDatabaseEngine.search("How are you?");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("Fine thanks and you?");
+	}
+	
+	@Test
+	public void new3TestFound() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.sqlDatabaseEngine.search("Are you alive?");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("No, sorry.");
 	}
 }
